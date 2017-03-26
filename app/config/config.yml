@@ -41,6 +41,14 @@ twig:
     number_format:
         thousands_separator: '.'
 
+# Doctrine cache
+doctrine_cache:
+    providers:
+      my_markdown_cache:
+        type: file_system
+        file_system:
+          directory: /tmp/doctrine_cache
+
 # Doctrine Configuration
 doctrine:
     dbal:

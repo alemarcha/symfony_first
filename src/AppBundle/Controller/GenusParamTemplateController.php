@@ -24,9 +24,18 @@ class GenusParamTemplateController extends Controller {
      */
     public function showAction($paramsName)
     {
+        $doctrineCache = $this->get('doctrine_cache.providers.my_markdown_cache');
         $funFacts = 'Octopuses can change the color of theidddr body in just *three-tenths* of a second!';
-        $funFacts = $this->get('markdown.parser')
-            ->transform($funFacts);
+        $key = md5($funFacts);
+        if($doctrineCache->contains($key)){
+            $funFacts = $doctrineCache->fetch($key);
+        }else {
+            sleep(3); // fake how slow this could be
+            $funFacts = $this->get('markdown.parser')
+                ->transform($funFacts);
+            $doctrineCache->save($key, $funFacts);
+
+        }
 
         return $this->render("genus/show.html.twig", [
             'name' => $paramsName,
