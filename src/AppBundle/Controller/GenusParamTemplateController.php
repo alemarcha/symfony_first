@@ -22,12 +22,10 @@ class GenusParamTemplateController extends Controller {
      */
     public function showAction($paramsName)
     {
-        $templating = $this->container->get("templating");
-        $html = $templating->render("genus/show.html.twig",[
-           'name' => $paramsName
+        return $this->render("genus/show.html.twig", [
+            'name' => $paramsName
         ]);
 
-        return new Response($html);
     }
 
 }
