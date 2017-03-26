@@ -38,7 +38,7 @@ class GenusParamTemplateController extends Controller {
     }
 
     /**
-     * @Route("/genusTemplate/{paramsName}/notes")
+     * @Route("/genusTemplate/{paramsName}/notes", name="get_show_notes")
      * @Method("GET")
      * @return Response
      */
