@@ -24,15 +24,13 @@ class GenusParamTemplateController extends Controller {
      */
     public function showAction($paramsName)
     {
-        $notes = [
-            'Octopus asked me a riddle, outsmarted me',
-            'I counted 8 legs... as they wrapped around me',
-            'Inked!'
-        ];
+        $funFacts = 'Octopuses can change the color of theidddr body in just *three-tenths* of a second!';
+        $funFacts = $this->get('markdown.parser')
+            ->transform($funFacts);
 
         return $this->render("genus/show.html.twig", [
-            'name'  => $paramsName,
-            'notes' => $notes
+            'name' => $paramsName,
+            'funFacts' => $funFacts
         ]);
 
     }
