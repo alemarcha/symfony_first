@@ -107,6 +107,11 @@ class Genus {
         $this->subFamily = $subFamily;
     }
 
+    public function getUpdatedAt()
+    {
+        return new \DateTime('-'.rand(0, 100).' days');
+    }
+
 
 
 }

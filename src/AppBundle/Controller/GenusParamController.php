@@ -15,8 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 
-
-class GenusParamController extends Controller{
+class GenusParamController extends Controller {
 
 
     /**
@@ -36,6 +35,17 @@ class GenusParamController extends Controller{
         return new Response('<html><body>Genus created</body></html>');
     }
 
+    /**
+     * @Route("/genus/query")
+     */
+    public function listAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $genuses = $em->getRepository('AppBundle:Genus')->findAll();
+
+        return $this->render('genus/list.html.twig' , ['genuses' => $genuses]);
+    }
 
     /**
      * @Route("/genus/{paramsName}")
