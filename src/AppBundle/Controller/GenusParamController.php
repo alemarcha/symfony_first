@@ -47,14 +47,22 @@ class GenusParamController extends Controller {
         return $this->render('genus/list.html.twig' , ['genuses' => $genuses]);
     }
 
+
+
     /**
-     * @Route("/genus/{paramsName}")
+     * @Route("/genus/{paramsName}", name="genus_show")
      * @param $paramsName
      * @return Response
      */
     public function showAction($paramsName)
     {
-        return new Response("Under the sea: {$paramsName}");
+        $em = $this->getDoctrine()->getManager();
+        $genus = $em->getRepository('AppBundle:Genus')->findOneBy(['name' => $paramsName]);
+        if (!$genus) {
+            throw $this->createNotFoundException('genus not found');
+        }
+        return $this->render('genus/show.html.twig', ['genus' => $genus]);
+        //return new Response("Under the sea: {$paramsName}");
     }
 
 }
